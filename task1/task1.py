@@ -1,6 +1,7 @@
 import subprocess
 import csv
 
+
 site_list = ['Google.com', 'Yandex.ru', 'dzen.ru', 'vk.com', 'youtube.com', 'mail.ru', 'ozon.ru', 'ok.ru', 'wildberries.ru', 'mangalib.me']
 
 with open("output.csv", mode="w", encoding='utf-8') as w_file:
