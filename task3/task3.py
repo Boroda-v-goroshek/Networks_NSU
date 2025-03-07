@@ -46,4 +46,5 @@ with open("output.csv", 'w', encoding='utf-8') as w_file:
         text = data.text.split('\n')
         file_writer.writerow(text)
 
-driver.quit()
+#river.quit()
+input()
