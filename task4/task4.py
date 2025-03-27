@@ -9,31 +9,27 @@ from my_pars import my_parser_func
 app = Flask(__name__)
 
 def write_in_bd(data_for_insert):
-    try:
-        connection = psycopg2.connect(
-            dbname="parse_utf",
-            user="Boroda-v-goroshek",
-            password="RAlf2005",
-            host="127.0.0.1",
-            port="5432"
-        )
+    connection = psycopg2.connect(
+        dbname="parse_utf",
+        user="Boroda-v-goroshek",
+        password="RAlf2005",
+        host="127.0.0.1",
+        port="5432"
+    )
 
-        connection.autocommit = True
-        cursor = connection.cursor()
+    connection.autocommit = True
+    cursor = connection.cursor()
 
-        # SQL-запрос для вставки данных
-        insert_query = "INSERT INTO dictionaries (title, other_info) VALUES (%s, %s)"
+    # SQL-запрос для вставки данных
+    insert_query = "INSERT INTO dictionaries (title, other_info) VALUES (%s, %s)"
 
-        # Выполнение вставки для каждого словаря в списке
-        for item in data_for_insert:
-            cursor.execute(insert_query, (item['title'], item['other_info']))
+    # Выполнение вставки для каждого словаря в списке
+    for item in data_for_insert:
+        cursor.execute(insert_query, (item['title'], item['other_info']))
 
-    except Exception as error:
-        print("Ошибка при подключении к базе данных:", error)
-    finally:
-        if connection:
-            cursor.close()
-            connection.close()
+    if connection:
+        cursor.close()
+        connection.close()
 
 @app.route('/parse', methods=['GET'])
 def parse():
